@@ -5,11 +5,12 @@
 .PHONY: cleanObjs build clean all
 
 CC = GCC
-CFLAGS = -Wall
+CFLAGS = -Wall $(inc)
 
 # directories
 outDir = ./bin
 sDir = ./src
+inc = -I./src/include/
 
 OBJS = main.o
 

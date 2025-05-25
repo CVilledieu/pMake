@@ -1,4 +1,3 @@
-#include <create.h>
 #include <options.h>
 
 
@@ -7,14 +6,15 @@ int main(int argc, char *argv[]) {
         printf("%s\n", "No input arguments given");
         return 0;
     }
-
+    char* sanatizedName[MAX_F_NAME];
     return 0;    
 }
 
 
 
-
-void createCProject(char * name){
+//0 = C, 1 = go, 2 = js, 3 = web
+//Languages are parsed in func int parseLang(char *argv[])
+void createCProject(char * name, int languageCode){
 
     //create dir with project name
     if (mkdir("./%s", name) != 0){
@@ -28,13 +28,20 @@ void createCProject(char * name){
         exit(1);
     }
 
+    switch (languageCode) {
+        case 0:
+            CreateC();
+        case 1:
+            CreateGo();
+        case 2:
+            createJs();
+        case 3:
+            createWeb();
+        default:
+            CreateBlank();
+    }
     
 
-
-
+    return;
 }
 
-
-char* sanitizeName(char* name){
-    char* cleanName[MAX_F_NAME];
-}
