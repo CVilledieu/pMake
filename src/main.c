@@ -5,9 +5,17 @@ To run make sure pMake is in system file path
 #include <stdlib.h>
 #include <stdio.h>
 #include <direct.h>
+#include <fileinfo.h>
 
 void createProject(char * name, char *lang);
 void createFile(char* name, char* content);
+
+/*
+typedef struct Project{
+    char *name;
+    char *language;
+
+};*/
 
 int main(int argc, char *argv[]) { 
     if (argc < 2){
@@ -22,12 +30,11 @@ int main(int argc, char *argv[]) {
             switch(argv[i][1]){
                 case 'n':
                     if (i+1 < argc){
-                        createProject(argv[i+1], "c");
+                        createProject(argv[i+1], "G");
                     } else {
                         break;
                     }
-                case 'h':
-                    printHelp();
+                    i++;
             }
         }
         
@@ -35,41 +42,35 @@ int main(int argc, char *argv[]) {
     return 0;    
 }
 
+//parses input
+//if help is flagged func calls printHelp() then exits
+//if valid input was given parseInput() returns a struct to be used to create the project
+//struct Project parseInput(int argc, char* argv[]){
+
+//}
+
+
  
 //Languages are parsed in func int parseLang(char *argv[])
 void createProject(char * name, char *lang){
 
     //create dir with project name
     if (_mkdir(name) != 0){
-        printf("Error:\n\t unable to create directory with path:\n\t %s", name);
+        printf("Error:\n\t Unable to create directory with path:\n\t %s", name);
         exit(1);
     }
 
     //Change to the project dir
     if(_chdir(name) != 0){
-        printf("Error: \n\t unable to switch to project directory.");
+        printf("Error: \n\t Unable to switch to project directory.");
         exit(1);
     }
     _mkdir("src");
     _mkdir("bin");
 
-    createFile(".gitignore", "bin");
-    createFile("readme.md", name);
-
-    /*
-    switch (*lang) {
-        case 'go':
-            CreateC();
-        case 'c':
-            CreateGo();
-        case 'js':
-            createJs();
-        case  'w':
-            createWeb();
-        default:
-            CreateBlank();
-    }
-    */
+    createFile(".gitignore", "bin/*");
+    createREADME(name);
+    createMain(lang);
 
     return;
 }
@@ -81,4 +82,5 @@ void createFile(char* name, char* content){
     fputs(content, fp);
 
     fclose(fp);
+    return;
 }

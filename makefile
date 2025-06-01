@@ -1,7 +1,3 @@
-#prefix table
-#s = src
-#
-
 .PHONY: cleanObjs build clean all
 
 CC = GCC
