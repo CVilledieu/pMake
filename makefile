@@ -10,16 +10,16 @@ CFLAGS = -Wall $(inc)
 # directories
 outDir = ./bin
 sDir = ./src
-inc = -I./src/include/
+inc = -Isrc/include
 
-OBJS = main.o
 
+OBJS = $(wildcard $(sDir)/*.c)
 appName = pMake
 
 all: build cleanObjs
 
-build:$(sDir)/$(OBJS)
-	$(CC) $^ -o $(outDir)/$(appName)
+build: $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $(outDir)/$(appName)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS)  $< -o $@

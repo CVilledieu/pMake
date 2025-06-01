@@ -1,22 +1,18 @@
 #include <stdlib.h>
-#include <options.h>
+#include <stdio.h>
 
 
-const *defaultPath = "./newProject";
-const *pathPrefix = "./";
+void info(void);
+void flags(void);
 
-typedef struct Options{
-    char* language;
-    char *projectName[MAX_F_NAME];
-};
 
 //If format error is found printSuggestHelp() is ran
-void printSuggestHelp(){
+void printSuggestHelp(void){
     printf("%s\n", "run 'pMake -h' for help");
 }
 
 //Prints information about the pMake when user runs pMake -h or -help
-void printHelp(){
+void printHelp(void){
     //general info about how to run pMake correctly
     info();
     //prints the available flags/options that can be provided when ran
@@ -25,14 +21,14 @@ void printHelp(){
 }
 
 
-void info(){
+void info(void){
     char *info;
-    info = "To run:\n pMake [flags/options]\n requred flags are -n [name of project/root dir] and -l [language]";
+    info = "To run:\n pMake [flags/options]\n requred flags are -n [name of project/root dir] \n if language is not provided a blank project will be created";
     printf("%s \n", info);
 }
 
 
-void flags(){
+void flags(void){
     int helpSize;
     char* helpInfo[] ={"-n [Name of project]", "-l [desired language]", "-h"};
     printf("%s\n", "List of commands:");
