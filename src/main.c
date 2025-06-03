@@ -9,7 +9,8 @@ To run make sure pMake is in system file path
 
 void cFiles(void);
 void goFiles(void);
-void createProject(char * name, enum languages language);
+void jsFiles(void);
+void webFiles(void);
 void createGitignore(void);
 void createREADME(char* name);
 
@@ -50,6 +51,7 @@ int main(int argc, char *argv[]) {
             jsFiles();
             break;
         case Web:
+            webFiles();
             break;
         default:
             break;
@@ -135,6 +137,21 @@ void jsFiles(void){
     jsContent = "main =()=>{\n}";
     fputs(jsContent, jsfp);
     fclose(jsfp);
+
+    return;
+}
+
+void webFiles(void){
+    FILE *webfp;
+    webfp = fopen("src/index.js", "w");
+    char* content;
+    content = "main = ()=>{\n}";
+    fputs(content, webfp);
+    fclose(webfp);
+
+    FILE *hfp;
+    hfp = fopen("src/views/index.html","w");
+    fclose(hfp);
 
     return;
 }
