@@ -5,13 +5,16 @@ To run make sure pMake is in system file path
 #include <stdlib.h>
 #include <stdio.h>
 #include <direct.h>
-#include <fileinfo.h>
 
+
+void cFiles(void);
+void goFiles(void);
 void createProject(char * name, enum languages language);
 void createFile(char* name, char* content);
+void createREADME(char* name);
 
 
-int main(int argc, char *argv[]) { 
+int main(int argc, char *argv[]) {
     Project pro;
     pro = parseInput(argc, argv);
     createProject(pro.name, pro.language);
@@ -39,8 +42,19 @@ void createProject(char * name, enum languages language){
 
     createFile(".gitignore", "bin/*");
     createREADME(name);
-    createMain(language);
 
+    switch(language){
+        case C:
+            cFiles();
+            break;
+        case Go:
+            goFiles();
+            break;
+        case Js:
+            break;
+        default:
+            break;
+    }
     return;
 }
 
@@ -51,5 +65,60 @@ void createFile(char* name, char* content){
     fputs(content, fp);
 
     fclose(fp);
+    return;
+}
+
+void createREADME(char* name){
+    FILE *fp;
+    fp = fopen("README.md", "w");
+
+    fputs("# ", fp);
+    fputs(name,fp);
+
+    fclose(fp);
+    return;
+}
+
+
+void cFiles(void){
+    //file pointer to main
+    FILE *mainfp;
+    mainfp = fopen("src/main.c","w");
+    char *mainContent = "int main(void){\n"
+    "\treturn 0;\n"
+    "}";
+    fputs(mainContent, mainfp);
+    fclose(mainfp);
+
+    FILE *makefp;
+    makefp = fopen("makefile","w");
+    char *makeContent = "CC = GCC\n"
+    "\n"
+    "CFLAGS = -Wall $(inc)\n"
+    "out = ./bin\n"
+    "sDir = ./src\n"
+    "inc = -Isrc/include\n";
+    fputs(makeContent, makefp);
+    fclose(makefp);
+    _mkdir("src/include");
+    return;
+}
+
+void goFiles(void){
+    FILE *mainfp;
+    mainfp = fopen("src/main.go","w");
+    char *mainContent = "package main\n"
+    "func main(){\n}";
+    fputs(mainContent, mainfp);
+    fclose(mainfp);
+
+    FILE *makefp;
+    makefp = fopen("makefile","w");
+    char *makeContent = "go build main.go";
+    fputs(makeContent, makefp);
+    fclose(makefp);
+
+    system("go mod init main");
+    
     return;
 }

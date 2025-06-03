@@ -44,6 +44,7 @@ Project parseInput(int argc, char* argv[]){
             case 'h':
             case 'H':
                 printHelp();
+                break;
             default:
                 printSuggestHelp();
                 exit(1);
@@ -52,6 +53,8 @@ Project parseInput(int argc, char* argv[]){
 
     return newProject;
 }
+
+
 
 enum languages parseLanguage(char* language){
     switch(language[0]){
@@ -75,10 +78,9 @@ enum languages parseLanguage(char* language){
             break;
         default: 
             return Unknown;
-            break;
-        return Unknown;
-    }
 
+    }
+    return Unknown;
 }
 
 //If format error is found printSuggestHelp() is ran
