@@ -5,6 +5,7 @@ enum languages{
     C,
     Go,
     Js,
+    Web,
     Unknown
 };
 
@@ -15,5 +16,6 @@ typedef struct Project{
 }Project;
 
 Project parseInput(int argc, char* argv[]);
+
 
 #endif

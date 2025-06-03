@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
+
+
 void printHelp(void);
 void printSuggestHelp(void);
 enum languages parseLanguage(char* language);
@@ -10,6 +12,7 @@ enum languages {
     C,
     Go,
     Js,
+    Web,
     Unknown
 };
 
@@ -74,6 +77,12 @@ enum languages parseLanguage(char* language){
         case 'J':
             if(language[1] == 's' || language[1] == 'S'){
                 return Js;
+            }
+            break;
+        case 'w':
+        case 'W':
+            if ((language[1]== 'e' || language[1] == 'E') && (language[2] == 'b' || language[2] == 'B')){
+                return Web;
             }
             break;
         default: 

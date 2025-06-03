@@ -10,40 +10,36 @@ To run make sure pMake is in system file path
 void cFiles(void);
 void goFiles(void);
 void createProject(char * name, enum languages language);
-void createFile(char* name, char* content);
+void createGitignore(void);
 void createREADME(char* name);
 
 
 int main(int argc, char *argv[]) {
-    Project pro;
-    pro = parseInput(argc, argv);
-    createProject(pro.name, pro.language);
-    return 0;    
-}
+    Project project;
+    project = parseInput(argc, argv);
 
-
- 
-//Languages are parsed in func int parseLang(char *argv[])
-void createProject(char * name, enum languages language){
 
     //create dir with project name
-    if (_mkdir(name) != 0){
-        printf("Error:\n\t Unable to create directory with path:\n\t %s", name);
+    if (_mkdir(project.name) != 0){
+        printf("Error:\n\t Unable to create directory with path:\n\t %s", project.name);
         exit(1);
     }
 
     //Change to the project dir
-    if(_chdir(name) != 0){
+    if(_chdir(project.name) != 0){
         printf("Error: \n\t Unable to switch to project directory.");
         exit(1);
     }
+
+    //main src dir
     _mkdir("src");
+    //main output dir
     _mkdir("bin");
 
-    createFile(".gitignore", "bin/*");
-    createREADME(name);
+    createGitignore();
+ 
 
-    switch(language){
+    switch(project.language){
         case C:
             cFiles();
             break;
@@ -51,17 +47,26 @@ void createProject(char * name, enum languages language){
             goFiles();
             break;
         case Js:
+            jsFiles();
+            break;
+        case Web:
             break;
         default:
             break;
     }
-    return;
+
+    createREADME(project.name);
+    return 0;    
 }
 
-void createFile(char* name, char* content){
-    FILE *fp;
-    fp = fopen(name, "w");
 
+
+
+void createGitignore(void){
+    FILE *fp;
+    fp = fopen(".gitignore", "w");
+    char* content;
+    content = ".gitignore";
     fputs(content, fp);
 
     fclose(fp);
@@ -120,5 +125,16 @@ void goFiles(void){
 
     system("go mod init main");
     
+    return;
+}
+
+void jsFiles(void){
+    FILE *jsfp;
+    jsfp = fopen("src/main.js","w");
+    char *jsContent;
+    jsContent = "main =()=>{\n}";
+    fputs(jsContent, jsfp);
+    fclose(jsfp);
+
     return;
 }
