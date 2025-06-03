@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
     _mkdir("bin");
 
     createGitignore();
-    createEnv();
 
     switch(project.language){
         case C:

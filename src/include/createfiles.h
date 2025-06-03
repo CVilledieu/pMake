@@ -8,7 +8,6 @@ void jsFiles(void);
 void webFiles(void);
 void createGitignore(void);
 void createREADME(char* name);
-void createEnv(void);
 
 
 #endif

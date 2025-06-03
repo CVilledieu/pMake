@@ -2,12 +2,7 @@
 #include <direct.h>
 #include <stdlib.h>
 
-void createEnv(void){
-    FILE *fp;
-    fp = fopen(".env","w");
-    fclose(fp);
-    return;
-}
+
 
 void createGitignore(void){
     FILE *fp;
