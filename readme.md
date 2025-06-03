@@ -11,6 +11,6 @@ No specific argument is required. If no path or project name is provided, then d
 
 ## Flags and Options
 
-* `-n [name]` Name of project / name of main dir
+* `-og [name]` Name of project / name of main dir
 * `-l [lang]` To add language specific files
 * `-h` Help message

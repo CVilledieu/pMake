@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <options.h>
 
 void createREADME(char* name){
     FILE *fp;
@@ -12,19 +13,26 @@ void createREADME(char* name){
     return;
 }
 
-void createMain(char* language){
+void createMain(enum languages language){
     FILE *fp;
     char* content;
-    if (*language == 'C'){
-        fp = fopen("src/main.c", "w");
-        content = "int main(void){\n}";
-    } else if (*language == 'G') {
-        system("go mod init main");
-        fp = fopen("src/main.go", "w");
-        
-        content = "func main(){\n}";
-    } else {
-        content = "";
+    switch(language){
+        case C:
+            fp = fopen("src/main.c", "w");
+            content = "int main(void){\n}";
+            break;
+        case Go:
+            system("go mod init main");
+            fp = fopen("src/main.go", "w");
+            
+            content = "func main(){\n}";
+            break;
+        case Js:
+            content = "";
+            break;
+        case Unknown:
+            content = "";
+            break;
     }
 
     fputs(content,fp);
@@ -43,9 +51,10 @@ char* makeFile(char* language){
 
 
 
-void languageSpecific(char* language){
+void languageSpecific(enum languages language){
     switch(language){
-        case 'G':
+        case C:
+        case Go:
             system("go mod init");
     }
 }*/
