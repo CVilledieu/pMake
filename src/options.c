@@ -79,16 +79,6 @@ enum languages parseLanguage(char* language){
         return Unknown;
     }
 
-
-    if ((language[0] == 'g'|| language[0] == 'G') &&  (language[1] == 'o'|| language[1] == 'O')){
-        return Go;
-    } else if ((language[0] == 'c' || language[0] == 'C')&& (language[1]=='\0')){
-        return C;
-    }else if ((language[0] == 'j' || language[1] == 'J') && (language[1] == 's' || language[1] == 'S')){
-        return Js;
-    }else{
-        return Unknown;
-    }
 }
 
 //If format error is found printSuggestHelp() is ran
