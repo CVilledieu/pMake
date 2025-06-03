@@ -26,8 +26,10 @@ typedef struct Project{
 Project parseInput(int argc, char* argv[]){
     Project newProject;
     //sets the default values of both the name and the language
-    newProject.name = getenv("NAME");
-    newProject.language = parseLanguage(getenv("LANGUAGE"));
+    newProject.name = "NewProject";
+    
+    newProject.language = C;
+    
     int options;
     while ((options = getopt(argc,argv,"hHo:O:l:L:")) != -1){
         switch(options){
@@ -85,6 +87,7 @@ enum languages parseLanguage(char* language){
             return Unknown;
 
     }
+
     return Unknown;
 }
 

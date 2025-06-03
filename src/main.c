@@ -12,7 +12,6 @@ int main(int argc, char *argv[]) {
     Project project;
     project = parseInput(argc, argv);
 
-
     //create dir with project name
     if (_mkdir(project.name) != 0){
         printf("Error:\n\t Unable to create directory with path:\n\t %s", project.name);
@@ -24,7 +23,6 @@ int main(int argc, char *argv[]) {
         printf("Error: \n\t Unable to switch to project directory.");
         exit(1);
     }
-
     //main src dir
     _mkdir("src");
     //main output dir
