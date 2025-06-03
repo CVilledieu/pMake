@@ -1,6 +1,6 @@
 #include <stdio.h>
-
-
+#include <direct.h>
+#include <stdlib.h>
 
 void createEnv(void){
     FILE *fp;
