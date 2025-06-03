@@ -3,7 +3,6 @@
 #include <unistd.h>
 
 
-
 void printHelp(void);
 void printSuggestHelp(void);
 enum languages parseLanguage(char* language);
@@ -27,8 +26,8 @@ typedef struct Project{
 Project parseInput(int argc, char* argv[]){
     Project newProject;
     //sets the default values of both the name and the language
-    newProject.name = "newProject";
-    newProject.language = C;
+    newProject.name = getenv("NAME");
+    newProject.language = parseLanguage(getenv("LANGUAGE"));
     int options;
     while ((options = getopt(argc,argv,"hHo:O:l:L:")) != -1){
         switch(options){
@@ -49,15 +48,12 @@ Project parseInput(int argc, char* argv[]){
                 printHelp();
                 break;
             default:
-                printSuggestHelp();
-                exit(1);
+                break;
         }
     }
 
     return newProject;
 }
-
-
 
 enum languages parseLanguage(char* language){
     switch(language[0]){

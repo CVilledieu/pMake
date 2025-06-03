@@ -13,6 +13,7 @@ void jsFiles(void);
 void webFiles(void);
 void createGitignore(void);
 void createREADME(char* name);
+void createEnv(void);
 
 
 int main(int argc, char *argv[]) {
@@ -38,7 +39,7 @@ int main(int argc, char *argv[]) {
     _mkdir("bin");
 
     createGitignore();
- 
+    createEnv();
 
     switch(project.language){
         case C:
@@ -62,7 +63,12 @@ int main(int argc, char *argv[]) {
 }
 
 
-
+void createEnv(void){
+    FILE *fp;
+    fp = fopen(".env","w");
+    fclose(fp);
+    return;
+}
 
 void createGitignore(void){
     FILE *fp;
