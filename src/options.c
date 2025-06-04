@@ -57,6 +57,7 @@ Project parseInput(int argc, char* argv[]){
     return newProject;
 }
 
+
 enum languages parseLanguage(char* language){
     switch(language[0]){
         case 'g':
